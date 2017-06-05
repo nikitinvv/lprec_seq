@@ -17,4 +17,4 @@ run python setup.py build
 
 TESTS
 
-See diretory tests and jupyter notebook therein
+See directory tests/ and jupyter notebook therein
