@@ -6,6 +6,6 @@ setup(name='lprec_python',
       version='0.1',
 
       # this is necessary so that the swigged python file gets picked up
-      py_modules=['lprec'],
+      #py_modules=['lprec'],
       packages = ['lprecmods'])
    

@@ -3,22 +3,23 @@ import initsfwd
 import initsadj 
 from numpy import *
 from scipy import interpolate
-import matplotlib.pyplot as plt
 class lpTransform:
 	def __init__(self,N,Nproj,Nslices,filter_type,pad):
-		self.N=N;self.Ns=N;self.Nslices=Nslices;self.filter_type=filter_type;	
+		self.N=N
+		self.Nslices=Nslices
+		self.filter_type=filter_type	
 		#size after zero padding in the angle direction (for nondense sampling rate)
 		self.osangles=int(max(round(3.0*N/2.0/Nproj),1))
 		self.Nproj=self.osangles*Nproj
 		#size after zero padding in radial direction
 		if (pad): 
-			self.Npad=self.Nspad=3*N/2
+			self.Npad=3*N/2
 		else: 
-			self.Npad=self.Nspad=N
+			self.Npad=N
 
 	def precompute(self):		
 		#precompute parameters for the lp method
-		self.Pgl=initsgl.create_gl(self.Npad,self.Nproj,self.Nspad,self.Nslices)
+		self.Pgl=initsgl.create_gl(self.Npad,self.Nproj)
 		self.Pfwd=initsfwd.create_fwd(self.Pgl)
 		self.Padj=initsadj.create_adj(self.Pgl,self.filter_type)
 
@@ -84,9 +85,4 @@ class lpTransform:
 			df[islice,:,:]=f0
 		f=df[:,N/2-N1/2:N/2+N1/2,N/2-N1/2:N/2+N1/2]*self.osangles*N1/N
                 return f
-
-		
-
-
-
 
